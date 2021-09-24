@@ -1,4 +1,5 @@
-def cumprimento():
-    print("Bom dia!")
+def cumprimento(nome):
+    print(f"Bom dia, {nome}!")
 
-cumprimento()
+nome = input("Qual o seu nome? ")
+cumprimento(nome)
