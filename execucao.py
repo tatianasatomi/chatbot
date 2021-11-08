@@ -1,19 +1,19 @@
 import telepot
 import json
-from chatbot import Severina
+from chatbot import Eon
 
 with open('token.json') as jsonFile:
     token = json.load(jsonFile)
 
 telegram = telepot.Bot(token)
-bot = Severina("Severina_Bot")
+bot = Eon("memoria")
 
 def receiveMsg(msg):
-    phrase = bot.listen(phrase=msg['text'])
-    response = bot.think(phrase)
-    bot.speak(response)
+    frase = bot.listen(phrase=msg['text'])
+    resposta = bot.think(frase)
+    bot.speak(resposta)
     msgType, chatType, chatID = telepot.glance(msg)
-    telegram.sendMessage(chatID, response)
+    telegram.sendMessage(chatID, resposta)
 
 telegram.message_loop(receiveMsg)
 

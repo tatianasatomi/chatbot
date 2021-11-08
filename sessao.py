@@ -7,7 +7,9 @@ modulo.funcao()
 
 modulo.teste("15º C")
 
-modulo.teste1("Final", "Fantasy")
+algo = input("Digite algo: ")
+algo_mais = input("Digite mais alguma coisa: ")
+modulo.teste1(algo, algo_mais)
 
 modulo.teste1(29.9, 16.45)
 
