@@ -21,13 +21,34 @@ class Eon():
         return phrase.lower()
 
     def think(self, phrase):
+        def abrir_link(url):
+            platform = sys.platform
+            if 'win' in platform:
+                os.startfile(url)
+            if 'linux' in platform:
+                try:
+                    sp.Popen(url)
+                except FileNotFoundError:
+                    sp.Popen(['xdg-open', url])
+
         if phrase in self.phrases:
             return self.phrases[phrase]
         if phrase == 'aprende':
             return 'O que você quer que eu aprenda?'
         if phrase == 'dicionário de japonês':
             return "http://nihongo.monash.edu/cgi-bin/wwwjdic?1C"
+        if 'executa ' in phrase:
+            link = phrase.replace('executa ', '')
+            abrir_link(link)
+            return "Feito!"
         
+        if "google" in phrase:
+            abrir_link("www.google.com.br")
+            return "Feito!"
+        if "gmail" in phrase:
+            abrir_link("www.gmail.com")
+            return "Feito!"
+
         # historic
         lastPhrase = self.historic[-1]
         if lastPhrase == 'Olá! Qual seu nome?':
@@ -74,16 +95,4 @@ class Eon():
         memory.close()
 
     def speak(self, phrase):
-        if 'Executa ' in phrase:
-            platform = sys.platform
-            command = phrase.replace('Executa ', '')
-            if 'win' in platform:
-                os.startfile(command)
-            if 'linux' in platform:
-                try:
-                    sp.Popen(command)
-                except FileNotFoundError:
-                    sp.Popen(['xdg-open', command])
-        else:
-            print(phrase)
         self.historic.append(phrase)
