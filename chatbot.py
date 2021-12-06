@@ -83,8 +83,33 @@ class Eon():
             return 'Aprendido!'
         
         if lastPhrase == "Quer conversar sobre isso?":
+            #response = phrase
             if "sim" in phrase:
-                return "Fique à vontade, vai ficar só entre nós."
+                return "Fique à vontade, vai ficar só entre nós. \nVocê dormiu bem hoje?"
+        if lastPhrase == "Fique à vontade, vai ficar só entre nós. \nVocê dormiu bem hoje?":
+            #response = phrase
+            if "sim" in phrase or "dormi" in phrase:
+                self.sono = True
+                return "E você comeu bem hoje?"
+            elif "não" in phrase:
+                self.sono = False
+                return "O sono é essencial para o seu bem estar. \nE você comeu bem hoje?"
+        if "E você comeu bem hoje?" in lastPhrase:
+            if "sim" in phrase or "comi" in phrase:
+                self.comida = True
+                return "Então você se desentendeu com alguém?"
+            elif "não" in phrase:
+                self.comida = False
+                return "Uma boa alimentação é essencial para sua saúde. \nAlém disso, você se desentendeu com alguém?"
+        if "você se desentendeu com alguém?" in lastPhrase:
+            if "sim" in phrase:
+                return "Que tal conversarem sobre o assunto?"
+            elif "não" in phrase:
+                if self.sono == False and self.comida == False:
+                    return "Você deveria cuidar melhor do seu bem estar, dormindo melhor e se alimentando bem."
+                else:
+                    return "Um dia de cada vez, respire fundo!"
+
         
 
         try:
